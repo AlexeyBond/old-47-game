@@ -1,1 +1,1 @@
-Game made on Ludum Dare 47.
+Game made on Omsky Ludum Dare 47.
