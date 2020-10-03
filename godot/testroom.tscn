@@ -1,0 +1,30 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://objects/ball.tscn" type="PackedScene" id=1]
+[ext_resource path="res://objects/velocity_field.tscn" type="PackedScene" id=2]
+[ext_resource path="res://objects/swing.tscn" type="PackedScene" id=3]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="ball" parent="." instance=ExtResource( 1 )]
+position = Vector2( 485.423, -308.267 )
+
+[node name="ball4" parent="." instance=ExtResource( 1 )]
+position = Vector2( 97.0513, 217.046 )
+
+[node name="ball3" parent="." instance=ExtResource( 1 )]
+position = Vector2( 484.475, -690.085 )
+
+[node name="ball2" parent="." instance=ExtResource( 1 )]
+position = Vector2( 493.37, 198.376 )
+
+[node name="Node2D2" parent="." instance=ExtResource( 2 )]
+position = Vector2( 110.673, 412.236 )
+velocity = Vector2( 0, -100 )
+
+[node name="Node2D" parent="." instance=ExtResource( 2 )]
+position = Vector2( 96.6481, 111.313 )
+velocity = Vector2( 0, 100 )
+
+[node name="Node2D3" parent="." instance=ExtResource( 3 )]
+position = Vector2( 490.31, 319.053 )
