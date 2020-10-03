@@ -1,0 +1,56 @@
+[gd_scene load_steps=3 format=2]
+
+[sub_resource type="GDScript" id=2]
+script/source = "extends Node2D
+
+var state: String
+
+export var nextPath: NodePath
+export var prevPath: NodePath
+
+func _ready():
+	$Area2D.connect(\"body_entered\", self, \"area_body_enter\")
+	get_node(nextPath).prevPath = get_path()
+
+var colors = {
+	\"red\": Color.red,
+	\"yellow\": Color.yellow,
+	\"green\": Color.green
+};
+
+func set_state(s):
+	if (state == \"green\" and s == \"yellow\"):
+		get_node(prevPath).set_state(\"red\")
+		get_node(nextPath).set_state(\"green\")
+
+	state = s
+	$ColorRect.color = colors[state]
+
+func area_body_enter(body):
+	if(state == \"red\"):
+		get_parent().on_illegal_touch()
+
+	if (state == \"green\"):
+		get_parent().on_touch_next()
+		set_state(\"yellow\")
+"
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 32.0
+
+[node name="Node2D" type="Node2D"]
+script = SubResource( 2 )
+
+[node name="ColorRect" type="ColorRect" parent="."]
+margin_left = -20.0
+margin_top = -20.0
+margin_right = 20.0
+margin_bottom = 20.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource( 1 )

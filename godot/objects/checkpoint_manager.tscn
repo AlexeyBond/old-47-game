@@ -1,0 +1,37 @@
+[gd_scene load_steps=2 format=2]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends Node2D
+
+func _ready():
+	var cc = get_children();
+	for c in cc:
+		c.set_state(\"red\")
+	
+	cc[0].set_state(\"green\")
+
+var touched = 0
+export var expected: int = 10
+
+func reset_touches():
+	if (touched > 0):
+		pass # TODO: Add effects, etc
+	touched = 0
+
+func on_illegal_touch():
+	if (touched >= expected):
+		return # Forgivable
+	reset_touches()
+
+func on_touch_next():
+	touched = touched + 1
+	
+	if (touched >= expected):
+		pass # TODO: win condition is here
+		return
+	
+	pass # TODO: Add effects (?)
+"
+
+[node name="Node2D" type="Node2D"]
+script = SubResource( 1 )

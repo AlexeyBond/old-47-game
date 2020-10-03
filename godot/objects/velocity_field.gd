@@ -1,17 +1,13 @@
 extends Node2D
 
-
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
-
 export var velocity: Vector2 = Vector2(0, -10)
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	$Area2D.connect("body_entered", self, "area_enter")
+func adjust_rotation():
 	self.set_rotation(Vector2(0, -1).angle_to(velocity))
 
+func _ready():
+	$Area2D.connect("body_entered", self, "area_enter")
+	adjust_rotation()
 
 func area_enter(body):
 	var b = body as RigidBody2D
@@ -23,8 +19,8 @@ func area_enter(body):
 	
 	b.set_gravity_scale(s)
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
 
-
+func _on_clicker_clicked():
+	velocity = velocity.rotated(PI * 0.25)
+	adjust_rotation()
+	# TODO: Sound ??
