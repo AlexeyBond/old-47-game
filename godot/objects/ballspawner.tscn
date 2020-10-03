@@ -5,6 +5,9 @@
 [sub_resource type="GDScript" id=1]
 script/source = "extends Node2D
 
+export var checkpoints_path: NodePath = \"../checkpoints\"
+export var spawn_on_start: bool = false
+
 var Ball = load(\"res://objects/ball.tscn\")
 
 var ball_path: NodePath = \"ball\"
@@ -17,12 +20,13 @@ func spawn_ball():
 	new.name = ball_path
 	new.set_velocity(Vector2(0, 10))
 	add_child(new)
-	
+
 func _ready():
-	spawn_ball()
+	if spawn_on_start: spawn_ball()
 
 func _on_clicker_clicked():
 	spawn_ball()
+	get_node(checkpoints_path).on_player_action()
 "
 
 [node name="Node2D" type="Node2D"]

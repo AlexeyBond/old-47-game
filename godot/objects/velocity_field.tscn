@@ -1,10 +1,28 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://objects/velocity_field.gd" type="Script" id=1]
 [ext_resource path="res://objects/clickable.tscn" type="PackedScene" id=2]
+[ext_resource path="res://resources/handle_4.png" type="Texture" id=3]
+[ext_resource path="res://resources/handle_6.png" type="Texture" id=4]
+[ext_resource path="res://resources/handle_8.png" type="Texture" id=5]
+[ext_resource path="res://resources/handle_5.png" type="Texture" id=6]
+[ext_resource path="res://resources/handle_7.png" type="Texture" id=7]
+[ext_resource path="res://resources/handle_9.png" type="Texture" id=8]
+[ext_resource path="res://resources/handle_2.png" type="Texture" id=9]
+[ext_resource path="res://resources/handle_0.png" type="Texture" id=10]
+[ext_resource path="res://resources/handle_1.png" type="Texture" id=11]
+[ext_resource path="res://resources/handle_3.png" type="Texture" id=12]
 
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 32, 32 )
+[sub_resource type="CircleShape2D" id=1]
+radius = 9.98452
+
+[sub_resource type="SpriteFrames" id=2]
+animations = [ {
+"frames": [ ExtResource( 10 ), ExtResource( 11 ), ExtResource( 9 ), ExtResource( 12 ), ExtResource( 3 ), ExtResource( 6 ), ExtResource( 4 ), ExtResource( 7 ), ExtResource( 5 ), ExtResource( 8 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource( 1 )
@@ -14,26 +32,11 @@ script = ExtResource( 1 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource( 1 )
 
-[node name="ColorRect" type="ColorRect" parent="."]
-margin_left = -12.0
-margin_top = -32.0
-margin_right = 12.0
-margin_bottom = 32.0
-color = Color( 1, 1, 1, 0.27451 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="ColorRect2" type="ColorRect" parent="."]
-margin_left = -0.681084
-margin_top = -44.6464
-margin_right = 27.3189
-margin_bottom = -14.6464
-rect_rotation = 45.0
-color = Color( 1, 1, 1, 0.27451 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
 [node name="clicker" parent="." instance=ExtResource( 2 )]
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+position = Vector2( -0.213346, 17.5248 )
+frames = SubResource( 2 )
+frame = 8
+playing = true
 [connection signal="clicked" from="clicker" to="." method="_on_clicker_clicked"]

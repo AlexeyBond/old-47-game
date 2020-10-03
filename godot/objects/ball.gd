@@ -11,7 +11,7 @@ func _physics_process(delta):
 	var v: Vector2 = $RigidBody2D.linear_velocity
 	var l = v.length()
 	
-	if (l < 0.01):
+	if (l < 1.0):
 		v = Vector2(100, 0).rotated(rand_range(0, PI * 2.0))
 		$RigidBody2D/CPUParticles2D.emitting = true
 		$RigidBody2D/CPUParticles2D.restart()

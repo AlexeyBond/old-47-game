@@ -1,6 +1,8 @@
 extends Node2D
 
-export var velocity: Vector2 = Vector2(0, -10)
+export var velocity: Vector2 = Vector2(0, -100)
+
+export var checkpoints_path: NodePath = "../checkpoints"
 
 func adjust_rotation():
 	self.set_rotation(Vector2(0, -1).angle_to(velocity))
@@ -14,13 +16,24 @@ func area_enter(body):
 
 	if not b: return
 
-	b.set_axis_velocity(velocity)
-	var s = sign(velocity.dot(ProjectSettings.get_setting("physics/2d/default_gravity_vector")))
+	#b.set_axis_velocity(velocity)
+	var d = velocity.dot(Vector2(0, 1))
+	var s = sign(d)
+	if abs(d) < 0.1: s = 0
 	
+	print('scl=', velocity.dot(Vector2(0, 1)))
+	
+	yield(get_tree(), "idle_frame")
+
 	b.set_gravity_scale(s)
+	b.apply_central_impulse(-b.linear_velocity * b.mass)
+	print(-b.linear_velocity * b.mass, b.linear_velocity, b.mass)
+	b.apply_central_impulse(velocity * b.mass)
 
 
 func _on_clicker_clicked():
 	velocity = velocity.rotated(PI * 0.25)
 	adjust_rotation()
+	var manager = get_node(checkpoints_path)
+	if manager: manager.on_player_action()
 	# TODO: Sound ??
