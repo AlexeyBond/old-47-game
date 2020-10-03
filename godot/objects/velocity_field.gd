@@ -10,6 +10,7 @@ export var velocity: Vector2 = Vector2(0, -10)
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	$Area2D.connect("body_entered", self, "area_enter")
+	self.set_rotation(Vector2(0, -1).angle_to(velocity))
 
 
 func area_enter(body):
