@@ -1,0 +1,42 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://objects/clickable.tscn" type="PackedScene" id=1]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends Node2D
+
+var Ball = load(\"res://objects/ball.tscn\")
+
+var ball_path: NodePath = \"ball\"
+
+func spawn_ball():
+	var exist = get_node(ball_path)
+	if (exist): remove_child(exist)
+	
+	var new = Ball.instance()
+	new.name = ball_path
+	new.set_velocity(Vector2(0, 10))
+	add_child(new)
+	
+func _ready():
+	spawn_ball()
+
+func _on_clicker_clicked():
+	spawn_ball()
+"
+
+[node name="Node2D" type="Node2D"]
+script = SubResource( 1 )
+
+[node name="ColorRect" type="ColorRect" parent="."]
+margin_left = -32.0
+margin_top = -32.0
+margin_right = 32.0
+margin_bottom = 32.0
+color = Color( 0.505882, 0, 0.333333, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="clicker" parent="." instance=ExtResource( 1 )]
+[connection signal="clicked" from="clicker" to="." method="_on_clicker_clicked"]
