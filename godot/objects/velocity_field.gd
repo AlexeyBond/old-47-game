@@ -16,18 +16,14 @@ func area_enter(body):
 
 	if not b: return
 
-	#b.set_axis_velocity(velocity)
 	var d = velocity.dot(Vector2(0, 1))
 	var s = sign(d)
 	if abs(d) < 0.1: s = 0
-	
-	print('scl=', velocity.dot(Vector2(0, 1)))
 	
 	yield(get_tree(), "idle_frame")
 
 	b.set_gravity_scale(s)
 	b.apply_central_impulse(-b.linear_velocity * b.mass)
-	print(-b.linear_velocity * b.mass, b.linear_velocity, b.mass)
 	b.apply_central_impulse(velocity * b.mass)
 
 

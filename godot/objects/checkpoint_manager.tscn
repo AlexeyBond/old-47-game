@@ -106,6 +106,9 @@ func on_touch_next():
 	pass # TODO: Add effects (?)
 
 func focus():
+	touched = 0
+	setup_visuals()
+
 	get_node(camera).set_position(get_position())
 
 func _on_clicker_clicked():
