@@ -37,6 +37,6 @@ shape = SubResource( 1 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 position = Vector2( -0.213346, 17.5248 )
 frames = SubResource( 2 )
-frame = 6
+frame = 1
 playing = true
 [connection signal="clicked" from="clicker" to="." method="_on_clicker_clicked"]
