@@ -1,0 +1,32 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://objects/clickable.tscn" type="PackedScene" id=1]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends Node2D
+
+export var next: NodePath
+export var camera: NodePath = \"../../camera\"
+
+func _on_clicker_clicked():
+	get_node(next).focus()
+
+func focus():
+	get_node(camera).set_position(get_position())
+"
+
+[node name="Node2D" type="Node2D"]
+script = SubResource( 1 )
+
+[node name="ColorRect" type="ColorRect" parent="."]
+margin_left = -16.0
+margin_top = -16.0
+margin_right = 16.0
+margin_bottom = 16.0
+color = Color( 0.996078, 0.00784314, 0.00784314, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="clicker" parent="." instance=ExtResource( 1 )]
+[connection signal="clicked" from="clicker" to="." method="_on_clicker_clicked"]
