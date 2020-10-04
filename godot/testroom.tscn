@@ -21,9 +21,6 @@ func _ready():
 	$camera.make_current()
 	$level1/checkpoints.focus()
 	$camera.force_update_transform()
-	
-	
-	$level4x1/checkpoints.focus()
 "
 
 [sub_resource type="CanvasItemMaterial" id=2]
