@@ -18,7 +18,7 @@ func _ready():
 	$camera.force_update_transform()
 	
 	
-	$level4x1/checkpoints.focus()
+	#$level4x1/checkpoints.focus()
 "
 
 [sub_resource type="CanvasItemMaterial" id=2]
@@ -41,8 +41,8 @@ func _on_clck2_clicked():
 [node name="Node2D" type="Node2D"]
 script = SubResource( 1 )
 __meta__ = {
-"_edit_horizontal_guides_": [ -314.685, -222.568, 541.017, -572.963, -875.909 ],
-"_edit_vertical_guides_": [ -747.093, -653.816, -469.33, -842.125, -221.619 ]
+"_edit_horizontal_guides_": [ -314.685, -222.568, 541.017, -572.963, -875.909, 391.618 ],
+"_edit_vertical_guides_": [ -747.093, -653.816, -469.33, -842.125, -221.619, -1416.42 ]
 }
 
 [node name="TileMap" type="TileMap" parent="."]
@@ -336,7 +336,7 @@ velocity = Vector2( 100, 0 )
 
 [node name="Node2D12" parent="level4x1" instance=ExtResource( 2 )]
 position = Vector2( -626.544, -876.396 )
-velocity = Vector2( 100, 0 )
+velocity = Vector2( 0, 300 )
 
 [node name="Node2D14" parent="level4x1" instance=ExtResource( 2 )]
 position = Vector2( -620.244, -576.535 )
@@ -360,7 +360,7 @@ velocity = Vector2( 100, 0 )
 
 [node name="Node2D18" parent="level4x1" instance=ExtResource( 2 )]
 position = Vector2( -137.12, -762.37 )
-velocity = Vector2( 100, 0 )
+velocity = Vector2( 500, 0 )
 
 [node name="Node2D13" parent="level4x1" instance=ExtResource( 2 )]
 position = Vector2( -324.504, -877.34 )
