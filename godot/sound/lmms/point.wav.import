@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/point.wav-ca8a820c82d95358e505ceee1c1fa114.sample"
+
+[deps]
+
+source_file="res://sound/lmms/point.wav"
+dest_files=[ "res://.import/point.wav-ca8a820c82d95358e505ceee1c1fa114.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

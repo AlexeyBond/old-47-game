@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/success.wav-db9b2aec61d69ebb3e073a2665adc68b.sample"
+
+[deps]
+
+source_file="res://sound/lmms/success.wav"
+dest_files=[ "res://.import/success.wav-db9b2aec61d69ebb3e073a2665adc68b.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

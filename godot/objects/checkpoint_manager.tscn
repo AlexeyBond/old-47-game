@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://resources/loop_meter_1.png" type="Texture" id=1]
 [ext_resource path="res://resources/loop_meter_0.png" type="Texture" id=2]
@@ -13,6 +13,12 @@
 [ext_resource path="res://resources/loop_light_Animation 1_5.png" type="Texture" id=11]
 [ext_resource path="res://resources/loop_light_Animation 1_6.png" type="Texture" id=12]
 [ext_resource path="res://objects/clickable.tscn" type="PackedScene" id=13]
+[ext_resource path="res://sound/lmms/done.wav" type="AudioStream" id=14]
+[ext_resource path="res://sound/freesound/142608__autistic-lucario__error.wav" type="AudioStream" id=15]
+[ext_resource path="res://sound/lmms/move.wav" type="AudioStream" id=16]
+[ext_resource path="res://sound/lmms/loop.wav" type="AudioStream" id=17]
+[ext_resource path="res://sound/lmms/success.wav" type="AudioStream" id=18]
+[ext_resource path="res://sound/lmms/point.wav" type="AudioStream" id=19]
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends Node2D
@@ -34,15 +40,15 @@ func _ready():
 		cc.append(c)
 
 	assert(len(cc) > 1)
-	
-	per_loop = len(cc)
-	expected = 3 * per_loop
-	touched = 0
 
 	for c in cc:
 		c.set_state(\"red\")
 
 	cc[0].set_state(\"green\")
+	
+	per_loop = len(cc)
+	expected = 3 * per_loop
+	touched = 0
 	
 	setup_visuals()
 
@@ -79,8 +85,6 @@ func setup_visuals():
 		$loop_meter_0.visible = true
 
 func reset_touches():
-	if (touched > 0):
-		pass # TODO: Add effects, etc
 	touched = 0
 	setup_visuals()
 	$clicker.enabled = false
@@ -89,10 +93,13 @@ func on_illegal_touch():
 	if (touched >= expected):
 		return # Forgivable
 	reset_touches()
+	$error_player.play()
 
 func on_player_action():
 	if (touched >= expected):
 		return # Forgivable
+	if (touched >= per_loop):
+		$error_player.play()
 	reset_touches()
 
 func on_touch_next():
@@ -102,8 +109,17 @@ func on_touch_next():
 	
 	if (touched >= expected):
 		$clicker.enabled = true
-	
-	pass # TODO: Add effects (?)
+		
+		if (touched - 1) < expected:
+			$success_player.play()
+			$point_player.play()
+			$loop_player.play()
+		return
+
+	if floor(touched / per_loop) != floor((touched - 1) / per_loop):
+		$loop_player.play()
+
+	$point_player.play()
 
 func focus():
 	touched = 0
@@ -112,6 +128,7 @@ func focus():
 	get_node(camera).set_position(get_position())
 
 func _on_clicker_clicked():
+	$move_player.play()
 	get_node(next_level_manager).focus()
 "
 
@@ -143,4 +160,24 @@ frames = SubResource( 2 )
 
 [node name="clicker" parent="." instance=ExtResource( 13 )]
 enabled = false
+
+[node name="done_player" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 14 )
+
+[node name="error_player" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 15 )
+volume_db = -6.318
+
+[node name="move_player" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 16 )
+volume_db = -6.881
+
+[node name="loop_player" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 17 )
+
+[node name="point_player" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 19 )
+
+[node name="success_player" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 18 )
 [connection signal="clicked" from="clicker" to="." method="_on_clicker_clicked"]

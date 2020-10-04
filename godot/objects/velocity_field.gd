@@ -10,6 +10,7 @@ func adjust_rotation():
 func _ready():
 	$Area2D.connect("body_entered", self, "area_enter")
 	adjust_rotation()
+	
 
 func area_enter(body):
 	var b = body as RigidBody2D
@@ -32,4 +33,4 @@ func _on_clicker_clicked():
 	adjust_rotation()
 	var manager = get_node(checkpoints_path)
 	if manager: manager.on_player_action()
-	# TODO: Sound ??
+	$AudioStreamPlayer2D.play(0.3)
